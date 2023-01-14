@@ -13,7 +13,8 @@ export class TachesComponent implements OnInit {
   taches: Array<Tache> = [];
   newTache: Tache = {
     titre : '',
-    termine : false
+    termine : false,
+    statut : ''
   };  
   
   filter:string = 'Tous';
@@ -29,14 +30,24 @@ export class TachesComponent implements OnInit {
 
   }  
 
-  ajouter() {
+  modifierStatut(tache: Tache, statut:string) {
+    this.newTache.statut = statut;
+    this.tacheService.updateTaches(tache).subscribe({
+      next: (data) => {
+      }
+    });
+  }
+
+  ajouter(statut:string) {
+
     this.tacheService.ajoutTaches(this.newTache).subscribe({
       next: (data) => {
         this.taches.push(data);
       }
     });
+    this.modifierStatut(this.newTache, statut)
     
-  }  
+  }
 
   supprimer(tache: Tache): void {
     this.tacheService.removeTaches(tache).subscribe({
@@ -53,6 +64,7 @@ export class TachesComponent implements OnInit {
       next: (data) => {
       }
     });
+    this.modifierStatut(this.newTache,'termine') 
   }
 
   loggout() {
@@ -64,4 +76,6 @@ export class TachesComponent implements OnInit {
   change(filter:string) {
     this.filter = filter;
   }
+
+  
 }
