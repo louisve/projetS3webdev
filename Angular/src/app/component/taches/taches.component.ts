@@ -46,7 +46,6 @@ export class TachesComponent implements OnInit {
       }
     });
     this.modifierStatut(this.newTache, statut)
-    
   }
 
   supprimer(tache: Tache): void {

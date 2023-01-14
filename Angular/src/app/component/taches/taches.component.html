@@ -33,10 +33,10 @@
                 <div class="col bg-warning">
                     <h1>En attente</h1>
                     <div class="d-flex flex-row justify-content-center ">
-                        <input id="inputAjoutTache2" class="saisieInput2" type="text" name="tache" placeholder="tache" [(ngModel)]="newTache.titre">
+                        <input id="inputAjoutTache2" class="saisieInput2" type="text" name="tache" placeholder="tache">
                         <button id="buttonAjoutTache2" class="btn btn-primary" value="Ajouter" (click)="ajouter('attente')">Ajouter</button>
                     </div>
-                    <div class="d-flex  justify-content-center">
+                    <div class="d-flex justify-content-center">
                         <div class="row">
                         <div id="listeTaches" class="d-flex  flex-column">
                             <div class="d-flex justify-content-between m-1" *ngFor="let tache of (taches | filtreTache:filter)">
@@ -54,10 +54,10 @@
                 <div class="col bg-success">
                     <h1>En cours</h1>
                     <div class="d-flex flex-row justify-content-center ">
-                        <input id="inputAjoutTache3" class="saisieInput" type="text" name="tache" placeholder="tache" [(ngModel)]="newTache.titre">
+                        <input id="inputAjoutTache3" class="saisieInput" type="text" name="tache" placeholder="tache" >
                         <button id="buttonAjoutTache3" class="btn btn-primary" value="Ajouter" (click)="ajouter('enCours')">Ajouter</button>
                     </div>
-                    <div class="d-flex  justify-content-center">
+                    <div class="d-flex justify-content-center">
                         <div class="row">
                         <div id="listeTaches" class="d-flex  flex-column">
                             <div class="d-flex justify-content-between m-1" *ngFor="let tache of (taches | filtreTache:filter)">
@@ -75,7 +75,7 @@
                 <div class="col bg-info">
                     <h1>Termine</h1>
                     <div class="d-flex flex-row justify-content-center ">
-                        <input id="inputAjoutTache4" class="saisieInput" type="text" name="tache" placeholder="tache" [(ngModel)]="newTache.titre">
+                        <input id="inputAjoutTache4" class="saisieInput" type="text" name="tache" placeholder="tache">
                         <button id="buttonAjoutTache4" class="btn btn-primary" value="Ajouter" (click)="ajouter('termine')">Ajouter</button>
                     </div>
                     <div class="d-flex flex-row justify-content-center">
