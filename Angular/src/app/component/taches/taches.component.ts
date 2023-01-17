@@ -9,13 +9,30 @@ import { UserService } from 'src/app/service/user.service';
   templateUrl: './taches.component.html',
   styleUrls: ['./taches.component.css']
 })
+
 export class TachesComponent implements OnInit {
   taches: Array<Tache> = [];
   newTache: Tache = {
     titre : '',
     termine : false,
-    statut : ''
-  };  
+    statut : 'undefined'
+  }; 
+
+  newTache2: Tache = {
+    titre : '',
+    termine : false,
+    statut : 'attente'
+  }; 
+  newTache3: Tache = {
+    titre : '',
+    termine : false,
+    statut : 'enCours'
+  }; 
+  newTache4: Tache = {
+    titre : '',
+    termine : false,
+    statut : 'termine'
+  }; 
   
   filter:string = 'Tous';
 
@@ -30,13 +47,13 @@ export class TachesComponent implements OnInit {
 
   }  
 
-  modifierStatut(tache: Tache, statut:string) {
-    this.newTache.statut = statut;
-    this.tacheService.updateTaches(tache).subscribe({
-      next: (data) => {
-      }
-    });
-  }
+  // modifierStatut(tache: Tache, statut:string) {
+  //   this.newTache.statut = statut;
+  //   this.tacheService.updateTaches(tache).subscribe({
+  //     next: (data) => {
+  //     }
+  //   });
+  // }
 
   ajouter(statut:string) {
 
@@ -45,7 +62,37 @@ export class TachesComponent implements OnInit {
         this.taches.push(data);
       }
     });
-    this.modifierStatut(this.newTache, statut)
+    //this.modifierStatut(this.newTache, statut)
+  }
+
+  ajouter2(statut:string) {
+
+    this.tacheService.ajoutTaches(this.newTache2).subscribe({
+      next: (data) => {
+        this.taches.push(data);
+      }
+    });
+    //this.modifierStatut(this.newTache, statut)
+  }
+
+  ajouter3(statut:string) {
+
+    this.tacheService.ajoutTaches(this.newTache3).subscribe({
+      next: (data) => {
+        this.taches.push(data);
+      }
+    });
+    //this.modifierStatut(this.newTache, statut)
+  }
+
+  ajouter4(statut:string) {
+
+    this.tacheService.ajoutTaches(this.newTache4).subscribe({
+      next: (data) => {
+        this.taches.push(data);
+      }
+    });
+    //this.modifierStatut(this.newTache, statut)
   }
 
   supprimer(tache: Tache): void {
@@ -63,8 +110,10 @@ export class TachesComponent implements OnInit {
       next: (data) => {
       }
     });
-    this.modifierStatut(this.newTache,'termine') 
+    //this.modifierStatut(this.newTache,'termine') 
   }
+
+  
 
   loggout() {
     this.userService.logout().subscribe(() => {
