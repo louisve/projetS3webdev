@@ -19,7 +19,7 @@ export class LoginComponent {
 
   submit():void {
       this.userService.login(this.user).subscribe({
-        next: () => { this.router.navigate(['taches']) },
+        next: () => { this.router.navigate(['liste']) },
         error: () => { this.error = true; }
       });
   }

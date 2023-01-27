@@ -4,6 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 const mongodb = require('mongodb');
 const bodyParser = require('body-parser');
 const { tacheGet, tachePost, tacheDelete, tachePut } = require('./tacheController');
+const { listeGet, listePost, listeDelete, listePut } = require('./listeController');
 const { signIn, login, logout, isConnected } = require('./authController');
 const cors = require('cors')
 
@@ -40,6 +41,10 @@ app.get('/taches', checkSignIn, tacheGet);
 app.post('/taches', checkSignIn, tachePost);
 app.delete('/taches/:id', checkSignIn, tacheDelete);
 app.put('/taches/:id', checkSignIn, tachePut);
+app.get('/liste', checkSignIn, listeGet);
+app.post('/liste', checkSignIn, listePost);
+app.delete('/liste/:id', checkSignIn, listeDelete);
+app.put('/liste/:id', checkSignIn, listePut);
 
 
 app.listen(port, () => {
