@@ -58,7 +58,7 @@ export async function ajoutListes(liste) {
     return res.json();
 }
 
-export async function updateTaches(liste) {
+export async function updateListes(liste) {
     let tempListe = { "titre": liste.titre}
     const res = await fetch('http://localhost:3000/liste/' + liste._id, {
         method: 'PUT',
