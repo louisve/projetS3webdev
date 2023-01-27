@@ -1,90 +1,84 @@
-<div class="container-fluid d-flex justify-content-center">
+<div class="container-fluid tachesscreen">
     <div class="d-flex flex-column">
-        <div class="bd-highlight d-flex justify-content-center">
-            <h1>Taches</h1>
-            <button class="btn btn-outline-secondary m-1" (click)="loggout()">Logout</button>
-
+        <div class="bd-highlight">
+            <button class="btn btn-outline-secondary m-1 bp" (click)="loggout()">Logout</button>
+            <h1>ToDoList</h1>
         </div>
-        
-        <div class="container ">
-            <div class="row">
-                <!--UNDEFINED-->
-                <div class="col bg-info">
-                    <h1>Undifined</h1>
+        <div cdkDropListGroup class="d-flex flex-row">
+            <div class="col-3 opn">
+                <div class = "coliste opf">
+                    <h2>Undefined</h2>
                     <div class="d-flex flex-row justify-content-center ">
-                        <input id="inputAjoutTache1" class="saisieInput1" type="text" name="tache" placeholder="tache" [(ngModel)]="newTache.titre">
-                        <button id="buttonAjoutTache1" class="bg-info"class="btn btn-primary" value="Ajouter" (click)="ajouter('undefined')">Ajouter</button>
+                        <input id="inputAjoutTache" class="saisieInput" type="text" name="tache" placeholder="tache" [(ngModel)]="newTache1.titre">
+                        <button id="buttonAjoutTache" class="btn btn-primary" value="Ajouter" (click)='ajouter1("")'>Ajouter</button>
                     </div>
-                    <div class="d-flex flex-row justify-content-center">
-                        <div class="row">
-                        <div id="listeTaches" class="d-flex  flex-column">
-                            <div class="d-flex" *ngFor="let tache of (taches | filtreTache:filter)" >
-                                <div *ngIf="(tache.statut == 'undefined')">
-                                <input (click)="modifier(tache)" type="checkbox" [(ngModel)]="tache.termine">
-                                <div [ngClass]="tache.termine? 'text-decoration-line-through' : '' ">{{tache.titre}}</div>
-                                <button class="btn btn-outline-danger m-1" (click)='supprimer(tache)'>Supprimer</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <!--EN ATTENTE-->
-                <div class="col bg-warning">
-                    <h1>En attente</h1>
-                    <div class="d-flex flex-row justify-content-center ">
-                        <input id="inputAjoutTache2" class="saisieInput2" type="text" name="tache" placeholder="tache" [(ngModel)]="newTache2.titre">
-                        <button id="buttonAjoutTache2" class="btn btn-primary" value="Ajouter" (click)="ajouter2('attente')">Ajouter</button>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <div class="row">
-                        <div id="listeTaches" class="d-flex  flex-column">
-                            <div class="d-flex justify-content-between m-1" *ngFor="let tache of (taches | filtreTache:filter)">
-                                <div *ngIf="(tache.statut == 'attente')">
+                    <div class="d-flex  justify-content-center">
+                        <div cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="taches" id="listeTaches" class="d-flex list-group">
+                            <div cdkDrag class="d-inline-flex justify-content-between" *ngFor="let tache of (taches | filtreTache:filter )" >
+                                <div *ngIf="tache.statut===''" class="boxes d-flex flex-row m-1">
                                     <input (click)="modifier(tache)" type="checkbox" [(ngModel)]="tache.termine">
-                                <div [ngClass]="tache.termine? 'text-decoration-line-through' : '' ">{{tache.titre}}</div>
-                                <button class="btn btn-outline-danger m-1" (click)='supprimer(tache)'>Supprimer</button>
+                                    <div class='ti align-self-center' [ngClass]="tache.termine? 'text-decoration-line-through' : '' ">{{tache.titre}}</div>
+                                        <button class="btn btn-outline-danger m-1" (click)='supprimer(tache)'>Supprimer</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <!--EN COURS -->
-                <div class="col bg-success">
-                    <h1>En cours</h1>
-                    <div class="d-flex flex-row justify-content-center ">
-                        <input id="inputAjoutTache3" class="saisieInput" type="text" name="tache" placeholder="tache"  [(ngModel)]="newTache3.titre">
-                        <button id="buttonAjoutTache3" class="btn btn-primary" value="Ajouter" (click)="ajouter3('enCours')">Ajouter</button>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <div class="row">
-                        <div id="listeTaches" class="d-flex  flex-column">
-                            <div class="d-flex justify-content-between m-1" *ngFor="let tache of (taches | filtreTache:filter)">
-                                <div *ngIf="(tache.statut == 'enCours')">
-                                <input (click)="modifier(tache)" type="checkbox" [(ngModel)]="tache.termine">
-                                <div [ngClass]="tache.termine? 'text-decoration-line-through' : '' ">{{tache.titre}}</div>
-                                <button class="btn btn-outline-danger m-1" (click)='supprimer(tache)'>Supprimer</button>
-                                </div>
-                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--TERMINEES -->
-                <div class="col bg-info">
-                    <h1>Termine</h1>
+            <div class="col-3 opn">
+                <div class = "coliste opf">
+                    <h2>En Attente</h2>
                     <div class="d-flex flex-row justify-content-center ">
-                        <input id="inputAjoutTache4" class="saisieInput" type="text" name="tache" placeholder="tache"  [(ngModel)]="newTache4.titre">
-                        <button id="buttonAjoutTache4" class="btn btn-primary" value="Ajouter" (click)="ajouter4('termine')">Ajouter</button>
+                        <input id="inputAjoutTache2" class="saisieInput" type="text" name="tache" placeholder="tache" [(ngModel)]="newTache2.titre">
+                        <button id="buttonAjoutTache2" class="btn btn-primary" value="Ajouter" (click)='ajouter2("attente")'>Ajouter</button>
                     </div>
-                    <div class="d-flex flex-row justify-content-center">
-                        <div id="listeTaches">
-                            <div *ngFor="let tache of (taches | filtreTache:filter)">
-                                <div *ngIf="(tache.statut == 'termine')">
+                    <div class="d-flex  justify-content-center">
+                        <div cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="attente" id="listeTaches" class="d-flex list-group">
+                            <div cdkDrag class="d-inline-flex justify-content-between" *ngFor="let tache of (attente | filtreTache:filter)">
+                                <div *ngIf="tache.statut==='attente'" class="boxes d-flex flex-row m-1">
+                                    <input (click)="modifier(tache)" type="checkbox" [(ngModel)]="tache.termine">
+                                    <div class='ti align-self-center' [ngClass]="tache.termine? 'text-decoration-line-through' : '' ">{{tache.titre}}</div>
+                                        <button class="btn btn-outline-danger m-1" (click)='supprimer(tache)'>Supprimer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-3 opn">
+                <div class = "coliste opf">
+                    <h2>En Cours</h2>
+                    <div class="d-flex flex-row justify-content-center ">
+                        <input id="inputAjoutTache3" class="saisieInput" type="text" name="tache" placeholder="tache" [(ngModel)]="newTache3.titre">
+                        <button id="buttonAjoutTache3" class="btn btn-primary" value="Ajouter" (click)='ajouter3("cours")'>Ajouter</button>
+                    </div>
+                    <div class="d-flex  justify-content-center">
+                        <div cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="cours" id="listeTaches" class="d-flex list-group">
+                            <div cdkDrag class="d-inline-flex justify-content-between" *ngFor="let tache of (cours | filtreTache:filter)">
+                                <div *ngIf="tache.statut==='cours'" class="boxes d-flex flex-row m-1">
+                                    <input (click)="modifier(tache)" type="checkbox" [(ngModel)]="tache.termine">
+                                    <div class='ti align-self-center' [ngClass]="tache.termine? 'text-decoration-line-through' : '' ">{{tache.titre}}</div>
+                                        <button class="btn btn-outline-danger m-1" (click)='supprimer(tache)'>Supprimer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-3 opn">
+                <div class = "coliste opf">
+                    <h2>Terminée(s)</h2>
+                    <div class="d-flex flex-row justify-content-center ">
+                        <input id="inputAjoutTache4" class="saisieInput" type="text" name="tache" placeholder="tache" [(ngModel)]="newTache4.titre">
+                        <button id="buttonAjoutTache4" class="btn btn-primary" value="Ajouter" (click)='ajouter4("termine")'>Ajouter</button>
+                    </div>
+                    <div class="d-flex  justify-content-center">
+                        <div cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="termine" id="listeTaches" class="d-flex list-group">
+                            <div cdkDrag class="d-inline-flex justify-content-between" *ngFor="let tache of (termine | filtreTache:filter)">
+                                <div *ngIf="tache.statut==='termine'" class="boxes d-flex flex-row m-1">
                                 <input (click)="modifier(tache)" type="checkbox" [(ngModel)]="tache.termine">
-                                <div [ngClass]="tache.termine? 'text-decoration-line-through' : '' ">{{tache.titre}}</div>
-                                <button class=" btn btn-outline-danger m-1" (click)='supprimer(tache)'>Supprimer</button>
+                                <div class='ti align-self-center' [ngClass]="tache.termine? 'text-decoration-line-through' : '' ">{{tache.titre}}</div>
+                                    <button class="btn btn-outline-danger m-1" (click)='supprimer(tache)'>Supprimer</button>
                                 </div>
                             </div>
                         </div>
@@ -92,10 +86,10 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="d-flex flex-row justify-content-center">
-            <button class="btn btn-outline-secondary m-1" (click)="change('Tous')">Tous</button>
-            <button class="btn btn-outline-secondary m-1" (click)="change('Actif')">Actif</button>
-            <button class="btn btn-outline-secondary m-1" (click)="change('Termine')">Terminé</button>
-        </div> -->
+        <div class="d-flex flex-row justify-content-center">
+            <button class="btn btn-outline-secondary m-1 bp" (click)="change('Tous')">Tous</button>
+            <button class="btn btn-outline-secondary m-1 bp" (click)="change('Actif')">Actif</button>
+            <button class="btn btn-outline-secondary m-1 bp" (click)="change('Termine')">Terminé</button>
+        </div>
     </div>
 </div>

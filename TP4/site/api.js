@@ -23,7 +23,7 @@ export async function ajoutTaches(tache) {
 }
 
 export async function updateTaches(tache) {
-    let tempTache = { "titre": tache.titre, "termine": tache.termine }
+    let tempTache = { "titre": tache.titre, "termine": tache.termine, "statut": tache.statut }
     const res = await fetch('http://localhost:3000/taches/' + tache._id, {
         method: 'PUT',
         headers: {
